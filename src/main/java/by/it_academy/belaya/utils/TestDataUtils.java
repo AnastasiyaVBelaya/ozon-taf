@@ -19,7 +19,7 @@ import java.util.Random;
 public class TestDataUtils {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final Random random = new Random();
-    private static final Logger logger = LogManager.getLogger(TestDataUtils.class);
+    private static final Logger logger = LogManager.getLogger();
     private static final Faker faker = new Faker();
 
 

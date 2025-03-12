@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class WaitUtils {
 
-    private static final Logger logger = LogManager.getLogger(WaitUtils.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private static final int DEFAULT_TIMEOUT = 10;
     private static final int DEFAULT_POLLING = 500;
