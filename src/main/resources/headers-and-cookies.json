@@ -1,0 +1,24 @@
+{
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "upgrade-insecure-requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "Host": "ozon.by"
+  },
+  "cookies": {
+    "__Secure-ETC": "af136f8f3da388790d09450f75c38556",
+    "__Secure-access-token": "7.0.CT2rBybmTKaiETvSp8jvBw.47.ASrND6fcOI1JOgsvuedDRx3JeI1TZ5aAwSS-GKR1HpkDu0RaQbxhWKem0qeEPYTvGA..20250312071022.hJRBVEIKpwtewRS6EWs74xGpMwof1C35r8GOc7PEaYw.1444c272000d4646b",
+    "__Secure-refresh-token": "7.0.CT2rBybmTKaiETvSp8jvBw.47.ASrND6fcOI1JOgsvuedDRx3JeI1TZ5aAwSS-GKR1HpkDu0RaQbxhWKem0qeEPYTvGA..20250312071022.6zUs83YEqsbC59ihRJmPHyWAxpx_Kszhg8meV_rxd1U.1221a73682f598ff",
+    "__Secure-ab-group": "47",
+    "__Secure-user-id": "0",
+    "__Secure-ext_xcid": "23d57939b607194d7e7a52eeca4651d0",
+    "abt_data": "7.7tRWC8fEMq0qMtLMnESszBJymxluGN9MbgeT-0u8Ima6wyXtE758P9bu_FPmh6ulbdn7fS0uM_qeE-mY-EqHt1vRpVJb8RD1M-kPN-i82g77rbLEaP9_Hcbqq1QFOGmbf2NAPUEGHVMkjGbqGXlNE_OJP3_IW46fQVBDbk1auT6DAQABBVKv_42WyPbuasDJ_bBbdBWX0AAQYNXCAe58k3CkgrbcCOME8JCbOpfyxeQe1Yrzgz45bixGl7OBgcDZHGoslQp0-qbuaelmL9SFn1iFqjJsIJbWrDmvisFkRVRh_hF3Y6nMUj47EBZO5_XOPhs1CtvvRDgKxvMM4hleieSocvPrjHVdMKGVUbp-dIjMJ51gLJfI_Imum-rQ7DAbOASkDc0XC_8bMN9ujpt9s7vG35pn2AQ2yXRSP9q-5tPfRaBnrRbIPjCmmyz0wvXh-2g-NA"
+  }
+}
