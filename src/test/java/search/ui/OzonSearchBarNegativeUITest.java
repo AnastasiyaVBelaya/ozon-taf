@@ -1,7 +1,7 @@
 package search.ui;
 
 import by.it_academy.belaya.base.Singleton;
-import by.it_academy.belaya.enums.SearchMessages;
+import by.it_academy.belaya.enums.Messages;
 import by.it_academy.belaya.pages.HomePage;
 import by.it_academy.belaya.testdata.*;
 import by.it_academy.belaya.utils.TestDataUtils;
@@ -54,7 +54,7 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search product by symbols")
     public void testSearchProductBySymbols() {
         String searchQuery = new Symbol().getRandomValue();
-        String expectedResult = SearchMessages.NO_RESULTS.getMessage();
+        String expectedResult = Messages.NO_RESULTS.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
@@ -67,7 +67,7 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search product by correct, but non-existent article")
     public void testSearchProductByNonExistentArticle() {
         String searchQuery = new NonExistentArticle().getRandomValue();
-        String expectedResult = SearchMessages.PAGE_NOT_FOUND.getMessage();
+        String expectedResult = Messages.PAGE_NOT_FOUND.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
@@ -80,7 +80,7 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search product with maximum query length")
     public void testSearchProductWithMaxQueryLength() {
         String searchQuery = "9".repeat(255);
-        String expectedResult = SearchMessages.NO_RESULTS.getMessage();
+        String expectedResult = Messages.NO_RESULTS.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
@@ -93,7 +93,7 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search product with query exceeding max length")
     public void testSearchProductWithExceedingQueryLength() {
         String searchQuery = "9".repeat(1000);
-        String expectedResult = SearchMessages.NO_RESULTS.getMessage();
+        String expectedResult = Messages.NO_RESULTS.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
@@ -133,7 +133,7 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search with spaces in the middle of the query")
     public void testSearchQueryWithSpacesInTheMiddle() {
         String searchQuery = new QueryWithSpacesInTheMiddle().getRandomValue();
-        String expectedResult = SearchMessages.INVALID_SEARCH_QUERY.getMessage();
+        String expectedResult = Messages.INVALID_SEARCH_QUERY.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()

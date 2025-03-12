@@ -2,7 +2,7 @@ package login.ui;
 
 import by.it_academy.belaya.base.Singleton;
 import by.it_academy.belaya.enums.Countries;
-import by.it_academy.belaya.enums.SearchMessages;
+import by.it_academy.belaya.enums.Messages;
 import by.it_academy.belaya.pages.HomePage;
 import by.it_academy.belaya.pages.LoginPage;
 import by.it_academy.belaya.testdata.Symbol;
@@ -31,7 +31,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
 
@@ -58,7 +58,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -140,7 +140,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -154,7 +154,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_PHONE_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.BLANK_EMAIL.getMessage(), result);
+        Assertions.assertEquals(Messages.BLANK_EMAIL.getMessage(), result);
     }
 
     @Test
@@ -180,7 +180,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.BLANK_EMAIL.getMessage(), result);
+        Assertions.assertEquals(Messages.BLANK_EMAIL.getMessage(), result);
     }
 
     @Test
@@ -194,7 +194,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_MAIL_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.NO_ACCOUNT_WITH_SUCH_EMAIL.getMessage(), result);
+        Assertions.assertEquals(Messages.NO_ACCOUNT_WITH_SUCH_EMAIL.getMessage(), result);
     }
 
     @Test
@@ -235,7 +235,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_MAIL_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -249,7 +249,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_MAIL_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
     }
 
     @Test
@@ -263,7 +263,7 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
-        Assertions.assertEquals(SearchMessages.INCORRECT_MAIL_FORMAT.getMessage(), result);
+        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
     }
 
     @AfterEach
