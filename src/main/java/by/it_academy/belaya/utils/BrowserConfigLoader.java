@@ -18,7 +18,8 @@ public class BrowserConfigLoader {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String CHROME_OPTIONS_CONFIG_FILE = "/chrome_options.properties";
-    private static final String HEADERS_AND_COOKIES_FILE = "/headers-and-cookies.json";
+    private static final String HEADERS_AND_COOKIES_FOR_SEARCH_FILE = "/headersAndCookiesForSearch.json";
+    private static final String HEADERS_AND_COOKIES_FOR_LOGIN_FILE = "/headersAndCookiesForLogin.json";
 
     public static ChromeOptions loadChromeOptions() {
         ChromeOptions options = new ChromeOptions();
@@ -40,24 +41,46 @@ public class BrowserConfigLoader {
     }
 
     public static Map<String, String> loadHeaders() throws IOException {
-        return loadHeadersAndCookies().get("headers");
+        return loadHeadersAndCookiesForSearch().get("headers");
     }
 
     public static Map<String, String> loadCookies() throws IOException {
-        return loadHeadersAndCookies().get("cookies");
+        return loadHeadersAndCookiesForSearch().get("cookies");
     }
 
-    private static Map<String, Map<String, String>> loadHeadersAndCookies() throws IOException {
-        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(HEADERS_AND_COOKIES_FILE)) {
+    public static Map<String, String> loadHeadersForLogin() throws IOException {
+        return loadHeadersAndCookiesForSearch().get("headers");
+    }
+
+    public static Map<String, String> loadCookiesForLogin() throws IOException {
+        return loadHeadersAndCookiesForSearch().get("cookies");
+    }
+
+    private static Map<String, Map<String, String>> loadHeadersAndCookiesForSearch() throws IOException {
+        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(HEADERS_AND_COOKIES_FOR_SEARCH_FILE)) {
             if (inputStream == null) {
-                logger.error("Configuration file not found: {}", HEADERS_AND_COOKIES_FILE);
-                throw new ConfigFileNotFoundException(HEADERS_AND_COOKIES_FILE);
+                logger.error("Configuration file not found: {}", HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
+                throw new ConfigFileNotFoundException(HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
             }
 
             return objectMapper.readValue(inputStream, Map.class);
         } catch (IOException e) {
-            logger.error("Error reading configuration file: {}", HEADERS_AND_COOKIES_FILE, e);
-            throw new ConfigFileReadingException(e, HEADERS_AND_COOKIES_FILE);
+            logger.error("Error reading configuration file: {}", HEADERS_AND_COOKIES_FOR_SEARCH_FILE, e);
+            throw new ConfigFileReadingException(e, HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
+        }
+    }
+
+    private static Map<String, Map<String, String>> loadHeadersAndCookiesForLogin() throws IOException {
+        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(HEADERS_AND_COOKIES_FOR_LOGIN_FILE)) {
+            if (inputStream == null) {
+                logger.error("Configuration file not found: {}", HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
+                throw new ConfigFileNotFoundException(HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
+            }
+
+            return objectMapper.readValue(inputStream, Map.class);
+        } catch (IOException e) {
+            logger.error("Error reading configuration file: {}", HEADERS_AND_COOKIES_FOR_LOGIN_FILE, e);
+            throw new ConfigFileReadingException(e, HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
         }
     }
 }
