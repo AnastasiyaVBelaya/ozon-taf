@@ -2,7 +2,8 @@ package by.it_academy.belaya.utils;
 
 public class Endpoints {
 
-    public static final String BASE_URL = "https://ozon.by/";
+    public static final String BASE_SEARCH_URL = "https://ozon.by/";
+    public static final String BASE_LOGIN_URL = "https://ozon.ru/";
     public static final String VALID_ARTICLE = "1737637528";
     public static final String SEARCH_BY_VALID_ARTICLE = "product/naruchnye-chasy-casio-f-91ws-4-1737637528/";
     public static final String VALID_NAME_FOR_HEADER = "телефон";
@@ -14,9 +15,12 @@ public class Endpoints {
     public static final String SEARCH_BY_EMPTY_QUERY = "search/?from_global=true&text=";
     public static final String SEARCH_BY_SPACES = "search/?from_global=true&text=     ";
     public static final String SEARCH_BY_TOO_LONG_QUERY = "search/?from_global=true&text="+"9".repeat(1000);
-
-    public static String getSearchUrl(String search) {
-        return BASE_URL + search;
+    public static final String LOGIN = "api/composer-api.bx/_action/fastEntryV3";
+    public static String getSearchUrl(String path) {
+        return BASE_SEARCH_URL + path;
+    }
+    public static String getLoginUrl(String path) {
+        return BASE_LOGIN_URL + path;
     }
 }
 
