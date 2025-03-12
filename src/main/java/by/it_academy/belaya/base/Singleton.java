@@ -1,7 +1,7 @@
 package by.it_academy.belaya.base;
 
 import by.it_academy.belaya.exceptions.WebDriverCreationException;
-import by.it_academy.belaya.utils.ChromeOptionsConfig;
+import by.it_academy.belaya.utils.BrowserConfigLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +27,7 @@ public class Singleton {
 
     private static WebDriver createDriver() {
         try {
-            ChromeOptions options = ChromeOptionsConfig.loadChromeOptions();
+            ChromeOptions options = BrowserConfigLoader.loadChromeOptions();
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
             return driver;
