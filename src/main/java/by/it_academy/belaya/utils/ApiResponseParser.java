@@ -9,9 +9,9 @@ import org.jsoup.nodes.Element;
 public class ApiResponseParser {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final String ARTICLE_BUTTON = "button[data-widget=webDetailSKU] .tsBodyControl400Small";
-    private static final String FULL_TEXT_RESULT_HEADER = "div[data-widget='fulltextResultsHeader'] .faa1_35 strong";
-    private static final String FIRST_PRODUCT_CARD = "div.bq017-a.bq017-a4.bq017-a6.jl9_25 span.tsBody500Medium";
+    private static final String ARTICLE_BUTTON = "button[data-widget=webDetailSKU]";
+    private static final String FULL_TEXT_RESULT_HEADER = "div[data-widget='fulltextResultsHeader']";
+    private static final String FIRST_PRODUCT_CARD = "[data-index=\"0\"] span.tsBody500Medium";
     private static final String PAGE_NOT_FOUND_MESSAGE = "div[data-widget='error'] h2.c4";
     private static final String NO_RESULTS_MESSAGE = "div .aa2g_35";
     private static final String ERROR_HAPPENED_MESSAGE = "div.aa2g_35";
