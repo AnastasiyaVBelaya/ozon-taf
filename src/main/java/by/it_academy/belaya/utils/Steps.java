@@ -1,36 +1,41 @@
 package by.it_academy.belaya.utils;
 
+import io.restassured.response.Response;
+import org.assertj.core.api.SoftAssertions;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.function.Function;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 
 public class Steps {
 
-    private static Map<String, String> headers;
-    private static Map<String, String> cookies;
+    private static Map<String, String> searchHeaders;
+    private static Map<String, String> searchCookies;
+    private static Map<String, String> loginHeaders;
 
-    public static void loadHeadersAndCookies() throws IOException {
-        headers = BrowserConfigLoader.loadHeaders();
-        cookies = BrowserConfigLoader.loadCookies();
+    public static void loadHeadersAndCookiesForSearch() throws IOException {
+        searchHeaders = BrowserConfigLoader.loadHeadersForSearch();
+        searchCookies = BrowserConfigLoader.loadCookiesForSearch();
     }
 
-    public static void runSearchTest(String searchEndpoint, String expected, Function<String, String> parser) {
-        String responseBody = given()
-                .headers(headers)
-                .cookies(cookies)
-                .when()
-                .get(Endpoints.getSearchUrl(searchEndpoint))
-                .then()
-                .statusCode(200)
-                .extract()
-                .body()
-                .asString();
+    public static void loadHeadersForLogin() throws IOException {
+        loginHeaders = BrowserConfigLoader.loadHeadersForLogin();
+    }
 
-        String actualText = parser.apply(responseBody);
-        assertThat(actualText, containsString(expected));
+    public static Response runSearchTest(String searchEndpoint) {
+        return given()
+                .headers(searchHeaders)
+                .cookies(searchCookies)
+                .when()
+                .get(Endpoints.getSearchUrl(searchEndpoint));
+    }
+
+    public static Response runLoginTest(String loginEndpoint) {
+        return given()
+                .headers(loginHeaders)
+                .when()
+                .post(Endpoints.getSearchUrl(loginEndpoint));
     }
 }
