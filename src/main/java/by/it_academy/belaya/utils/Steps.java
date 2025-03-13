@@ -1,11 +1,10 @@
 package by.it_academy.belaya.utils;
 
 import io.restassured.response.Response;
-import org.assertj.core.api.SoftAssertions;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.function.Function;
+
 
 import static io.restassured.RestAssured.given;
 
@@ -32,10 +31,11 @@ public class Steps {
                 .get(Endpoints.getSearchUrl(searchEndpoint));
     }
 
-    public static Response runLoginTest(String loginEndpoint) {
+    public static Response runLoginTest(String loginEndpoint, String body) {
         return given()
                 .headers(loginHeaders)
+                .body(body)
                 .when()
-                .post(Endpoints.getSearchUrl(loginEndpoint));
+                .post(Endpoints.getLoginUrl(loginEndpoint));
     }
 }
