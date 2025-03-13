@@ -19,68 +19,52 @@ public class BrowserConfigLoader {
 
     private static final String CHROME_OPTIONS_CONFIG_FILE = "/chrome_options.properties";
     private static final String HEADERS_AND_COOKIES_FOR_SEARCH_FILE = "/headersAndCookiesForSearch.json";
-    private static final String HEADERS_AND_COOKIES_FOR_LOGIN_FILE = "/headersAndCookiesForLogin.json";
+    private static final String HEADERS_FOR_LOGIN_FILE = "/headersForLogin.json";
 
     public static ChromeOptions loadChromeOptions() {
+        Properties properties = loadProperties(CHROME_OPTIONS_CONFIG_FILE);
         ChromeOptions options = new ChromeOptions();
-        Properties properties = new Properties();
-
-        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(CHROME_OPTIONS_CONFIG_FILE)) {
-            if (inputStream == null) {
-                logger.error("Configuration file not found: " + CHROME_OPTIONS_CONFIG_FILE);
-                throw new ConfigFileNotFoundException(CHROME_OPTIONS_CONFIG_FILE);
-            }
-            properties.load(inputStream);
-            properties.forEach((key, value) -> options.addArguments(key + "=" + value));
-
-        } catch (IOException e) {
-            logger.error("Error reading configuration file: " + CHROME_OPTIONS_CONFIG_FILE, e);
-            throw new ConfigFileReadingException(e, CHROME_OPTIONS_CONFIG_FILE);
-        }
+        properties.forEach((key, value) -> options.addArguments(key + "=" + value));
         return options;
     }
 
-    public static Map<String, String> loadHeaders() throws IOException {
-        return loadHeadersAndCookiesForSearch().get("headers");
+    public static Map<String, String> loadHeadersForSearch() throws IOException {
+        return loadJsonFile(HEADERS_AND_COOKIES_FOR_SEARCH_FILE).get("headers");
     }
 
-    public static Map<String, String> loadCookies() throws IOException {
-        return loadHeadersAndCookiesForSearch().get("cookies");
+    public static Map<String, String> loadCookiesForSearch() throws IOException {
+        return loadJsonFile(HEADERS_AND_COOKIES_FOR_SEARCH_FILE).get("cookies");
     }
 
     public static Map<String, String> loadHeadersForLogin() throws IOException {
-        return loadHeadersAndCookiesForSearch().get("headers");
+        return loadJsonFile(HEADERS_FOR_LOGIN_FILE).get("headers");
     }
 
-    public static Map<String, String> loadCookiesForLogin() throws IOException {
-        return loadHeadersAndCookiesForSearch().get("cookies");
-    }
-
-    private static Map<String, Map<String, String>> loadHeadersAndCookiesForSearch() throws IOException {
-        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(HEADERS_AND_COOKIES_FOR_SEARCH_FILE)) {
+    private static Properties loadProperties(String fileName) {
+        Properties properties = new Properties();
+        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(fileName)) {
             if (inputStream == null) {
-                logger.error("Configuration file not found: {}", HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
-                throw new ConfigFileNotFoundException(HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
+                logger.error("Configuration file not found: {}", fileName);
+                throw new ConfigFileNotFoundException(fileName);
             }
-
-            return objectMapper.readValue(inputStream, Map.class);
+            properties.load(inputStream);
         } catch (IOException e) {
-            logger.error("Error reading configuration file: {}", HEADERS_AND_COOKIES_FOR_SEARCH_FILE, e);
-            throw new ConfigFileReadingException(e, HEADERS_AND_COOKIES_FOR_SEARCH_FILE);
+            logger.error("Error reading configuration file: {}", fileName, e);
+            throw new ConfigFileReadingException(e, fileName);
         }
+        return properties;
     }
 
-    private static Map<String, Map<String, String>> loadHeadersAndCookiesForLogin() throws IOException {
-        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(HEADERS_AND_COOKIES_FOR_LOGIN_FILE)) {
+    private static Map<String, Map<String, String>> loadJsonFile(String fileName) throws IOException {
+        try (InputStream inputStream = BrowserConfigLoader.class.getResourceAsStream(fileName)) {
             if (inputStream == null) {
-                logger.error("Configuration file not found: {}", HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
-                throw new ConfigFileNotFoundException(HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
+                logger.error("Configuration file not found: {}", fileName);
+                throw new ConfigFileNotFoundException(fileName);
             }
-
             return objectMapper.readValue(inputStream, Map.class);
         } catch (IOException e) {
-            logger.error("Error reading configuration file: {}", HEADERS_AND_COOKIES_FOR_LOGIN_FILE, e);
-            throw new ConfigFileReadingException(e, HEADERS_AND_COOKIES_FOR_LOGIN_FILE);
+            logger.error("Error reading configuration file: {}", fileName, e);
+            throw new ConfigFileReadingException(e, fileName);
         }
     }
 }
