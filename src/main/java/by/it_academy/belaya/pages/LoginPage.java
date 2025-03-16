@@ -80,7 +80,8 @@ public class LoginPage {
 
         List<WebElement> options = getCountryOptions();
         Optional<WebElement> countryToSelect = options.stream()
-                .filter(country -> Objects.requireNonNull(country.getAttribute("title")).equalsIgnoreCase(countryName.getCountryName()))
+                .filter(country -> Objects.requireNonNull(country.getAttribute("title"))
+                        .equalsIgnoreCase(countryName.getCountryName()))
                 .findFirst();
 
         if (countryToSelect.isPresent()) {
@@ -148,12 +149,12 @@ public class LoginPage {
         return this;
     }
 
-    public WebElement getIncorrectInputMessage(){
+    public WebElement getIncorrectInputMessage() {
         WaitUtils.waitForElementToBeVisible(incorrectInputMessage);
         return incorrectInputMessage;
     }
 
-    public WebElement getWhyCantISighInButton(){
+    public WebElement getWhyCantISighInButton() {
         WaitUtils.waitForElementToBeVisible(whyCantISighInButton);
         return whyCantISighInButton;
     }

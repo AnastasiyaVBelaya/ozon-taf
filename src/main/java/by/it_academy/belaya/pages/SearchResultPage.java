@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Arrays;
-
 public class SearchResultPage {
 
     private static final Logger logger = LogManager.getLogger();
@@ -30,7 +28,7 @@ public class SearchResultPage {
     @FindBy(xpath = "//div[@data-widget='fulltextResultsHeader']")
     private WebElement noExactResultsMessage;
 
-    @FindBy(xpath = "(//a[@class='q4b011-a tile-clickable-element lj9_25'])[1]")
+    @FindBy(xpath = "//*[@id='contentScrollPaginator']//a/div/span[1]")
     private WebElement searchResultTitle;
 
     @FindBy(xpath = "//div[@data-widget='fulltextResultsHeader']")
@@ -82,14 +80,6 @@ public class SearchResultPage {
         String query = getElementDomProperty(searchInputField);
         logger.info("Search query after search: {}", query);
         return query;
-    }
-
-    public boolean doesResultContainsAllSearchWords(String searchQuery) {
-        String result = getSearchResultTitle().toLowerCase();
-        boolean containsAll = Arrays.stream(searchQuery.split(" "))
-                .allMatch(word -> result.contains(word.toLowerCase()));
-        logger.info("Does the result contain all search words ('{}')? {}", searchQuery, containsAll);
-        return containsAll;
     }
 
     private String getTextWhenVisible(WebElement element) {

@@ -22,7 +22,7 @@ public class HomePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement searchSubmitButton;
 
-    @FindBy(xpath = "//div[@class='q4b011-a c5t_49_11']")
+    @FindBy(xpath = "//div[@data-widget='profileMenuAnonymous']")
     private WebElement loginButton;
 
     public HomePage() {
