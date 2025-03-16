@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
-import java.util.Set;
 
 
 public class WaitUtils {
@@ -40,19 +39,6 @@ public class WaitUtils {
             createFluentWait().until(ExpectedConditions.elementToBeClickable(element));
         } catch (TimeoutException e) {
             logger.error("Element not clickable after waiting: {}", element, e);
-            throw e;
-        }
-    }
-
-    public static void waitForWindowCountToIncrease(String originalWindowHandle) {
-        try {
-            createFluentWait().until(driver -> {
-                Set<String> windowHandles = driver.getWindowHandles();
-                return windowHandles.size() > 1 && !windowHandles.contains(originalWindowHandle);
-            });
-        } catch (TimeoutException e) {
-            logger.error("New window was not opened within the timeout. Original window handle: {}",
-                    originalWindowHandle, e);
             throw e;
         }
     }
