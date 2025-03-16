@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 
 public class ProductName {
-    private List<String> productNames;
+    private final List<String> productNames;
 
     public ProductName() {
         this.productNames =
