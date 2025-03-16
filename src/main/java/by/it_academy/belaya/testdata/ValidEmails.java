@@ -10,7 +10,7 @@ public class ValidEmails {
 
     public ValidEmails() {
         this.validEmails =
-                TestDataUtils.loadTestDataFromJson("validEmails.json", new TypeReference<List<String>>() {
+                TestDataUtils.loadTestDataFromJson("validEmailsForLoginWIthUI.json", new TypeReference<List<String>>() {
                 });
     }
 
