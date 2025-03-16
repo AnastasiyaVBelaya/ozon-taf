@@ -10,32 +10,35 @@ import static io.restassured.RestAssured.given;
 
 public class Steps {
 
-    private static Map<String, String> searchHeaders;
-    private static Map<String, String> searchCookies;
-    private static Map<String, String> loginHeaders;
+    private static Map<String, String> headers;
 
-    public static void loadHeadersAndCookiesForSearch() throws IOException {
-        searchHeaders = BrowserConfigLoader.loadHeadersForSearch();
-        searchCookies = BrowserConfigLoader.loadCookiesForSearch();
+    public static void loadHeaders() throws IOException {
+        headers= BrowserConfigLoader.loadHeaders();
     }
 
-    public static void loadHeadersForLogin() throws IOException {
-        loginHeaders = BrowserConfigLoader.loadHeadersForLogin();
-    }
-
-    public static Response runSearchTest(String searchEndpoint) {
+    public static Response runSearchTest(String searchEndpoint, String body) {
         return given()
-                .headers(searchHeaders)
-                .cookies(searchCookies)
+                .headers(headers)
+                .body(body)
+                .log().all()
                 .when()
-                .get(Endpoints.getSearchUrl(searchEndpoint));
+                .post(searchEndpoint)
+                .then()
+                .log().all()
+                .extract()
+                .response();
     }
 
     public static Response runLoginTest(String loginEndpoint, String body) {
         return given()
-                .headers(loginHeaders)
+                .headers(headers)
                 .body(body)
+                .log().all()
                 .when()
-                .post(Endpoints.getLoginUrl(loginEndpoint));
+                .post(loginEndpoint)
+                .then()
+                .log().all()
+                .extract()
+                .response();
     }
 }

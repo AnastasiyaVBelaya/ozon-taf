@@ -18,8 +18,7 @@ public class BrowserConfigLoader {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String CHROME_OPTIONS_CONFIG_FILE = "/chrome_options.properties";
-    private static final String HEADERS_AND_COOKIES_FOR_SEARCH_FILE = "/headersAndCookiesForSearch.json";
-    private static final String HEADERS_FOR_LOGIN_FILE = "/headersForLogin.json";
+    private static final String HEADERS_FILE = "/headers.json";
 
     public static ChromeOptions loadChromeOptions() {
         Properties properties = loadProperties(CHROME_OPTIONS_CONFIG_FILE);
@@ -28,16 +27,8 @@ public class BrowserConfigLoader {
         return options;
     }
 
-    public static Map<String, String> loadHeadersForSearch() throws IOException {
-        return loadJsonFile(HEADERS_AND_COOKIES_FOR_SEARCH_FILE).get("headers");
-    }
-
-    public static Map<String, String> loadCookiesForSearch() throws IOException {
-        return loadJsonFile(HEADERS_AND_COOKIES_FOR_SEARCH_FILE).get("cookies");
-    }
-
-    public static Map<String, String> loadHeadersForLogin() throws IOException {
-        return loadJsonFile(HEADERS_FOR_LOGIN_FILE).get("headers");
+    public static Map<String, String> loadHeaders() throws IOException {
+        return loadJsonFile(HEADERS_FILE).get("headers");
     }
 
     private static Properties loadProperties(String fileName) {
