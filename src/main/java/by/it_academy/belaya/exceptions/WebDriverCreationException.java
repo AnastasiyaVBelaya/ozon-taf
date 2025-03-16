@@ -6,5 +6,4 @@ public class WebDriverCreationException extends RuntimeException {
     public WebDriverCreationException(Throwable cause) {
         super(DEFAULT_MESSAGE, cause);
     }
-
 }

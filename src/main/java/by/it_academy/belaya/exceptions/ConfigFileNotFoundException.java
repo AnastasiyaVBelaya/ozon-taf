@@ -6,5 +6,4 @@ public class ConfigFileNotFoundException extends RuntimeException {
     public ConfigFileNotFoundException(String fileName) {
         super(DEFAULT_MESSAGE + fileName);
     }
-
 }
