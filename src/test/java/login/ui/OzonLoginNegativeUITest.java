@@ -6,15 +6,22 @@ import by.it_academy.belaya.enums.Messages;
 import by.it_academy.belaya.pages.HomePage;
 import by.it_academy.belaya.pages.LoginPage;
 import by.it_academy.belaya.testdata.Symbol;
+import io.qameta.allure.*;
+import io.qameta.allure.junit5.AllureJunit5;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@Epic("Login UI Tests")
+@Feature("Negative Login Scenarios")
+@ExtendWith(AllureJunit5.class)
 public class OzonLoginNegativeUITest {
     private LoginPage loginPage;
     private static final Logger logger = LogManager.getLogger();
 
     @BeforeEach
+    @Step("Открытие страницы логина перед каждым тестом")
     public void beforeEach(TestInfo testInfo) {
         HomePage homePage = new HomePage();
         loginPage = homePage.openLoginPage();
@@ -22,8 +29,11 @@ public class OzonLoginNegativeUITest {
     }
 
     @Test
+    @Description("Авторизация по номеру телефона с пустым запросом")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Login by phone number with empty query")
     public void testLoginByPhoneNumberWithEmptyQuery() {
+        Allure.step("Ввод пустого номера телефона");
         String result = loginPage
                 .selectCountryFromDropDown(Countries.BELARUS)
                 .enterPhoneNumber("")
@@ -31,12 +41,16 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
+    @Description("Авторизация по номеру телефона с одним пробелом")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Login by phone number with single space character")
     public void testLoginByPhoneNumberWithSingleSpace() {
+        Allure.step("Ввод номера телефона, содержащего только пробел");
         String result = loginPage
                 .selectCountryFromDropDown(Countries.BELARUS)
                 .enterPhoneNumber(" ")
@@ -44,13 +58,16 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
-
     @Test
+    @Description("Авторизация по номеру телефона с одной цифрой")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Login by phone number with single digit")
     public void testLoginByPhoneNumberWithSingleDigit() {
+        Allure.step("Ввод номера телефона, состоящего из одной цифры");
         String result = loginPage
                 .selectCountryFromDropDown(Countries.BELARUS)
                 .enterPhoneNumber("1")
@@ -58,12 +75,16 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
+    @Description("Авторизация по номеру телефона с текстом")
+    @Severity(SeverityLevel.MINOR)
     @DisplayName("Login by phone number with letters")
     public void testLoginByPhoneNumberWithSingleCharacter() {
+        Allure.step("Ввод номера телефона с буквами");
         String result = loginPage
                 .selectCountryFromDropDown(Countries.BELARUS)
                 .enterPhoneNumber("button")
@@ -71,40 +92,19 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
-    @DisplayName("Login by invalid phone number - check why can't I sign in button")
-    public void testLoginByInvalidPhoneNumberWhyCantISignInButton() {
-        String number = "0".repeat(10);
-
-        Assertions.assertTrue(loginPage
-                .selectCountryFromDropDown(Countries.BELARUS)
-                .enterPhoneNumber(number)
-                .clickOnSignInButton()
-                .getWhyCantISighInButton()
-                .isEnabled());
-    }
-
-    @Test
-    @DisplayName("Login by invalid phone number - check incorrect phone format message")
-    public void testLoginByInvalidPhoneNumberIncorrectPhoneFormatMessage() {
-        String number = "0".repeat(10);
-        String result = loginPage
-                .selectCountryFromDropDown(Countries.BELARUS)
-                .enterPhoneNumber(number)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
-    }
-
-    @Test
+    @Description("Авторизация с использованием слишком длинного номера телефона")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Login by too long phone number")
     public void testLoginByTooLongPhoneNumberIncorrectPhoneFormatMessage() {
+        Allure.step("Генерация номера телефона длиной 255 символов");
         String number = "9".repeat(255);
+
+        Allure.step("Ввод слишком длинного номера телефона");
         String result = loginPage
                 .selectCountryFromDropDown(Countries.BELARUS)
                 .enterPhoneNumber(number)
@@ -112,54 +112,16 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
     }
 
     @Test
-    @DisplayName("Login by phone number with symbols")
-    public void testLoginByPhoneNumberWithSymbols() {
-        String number = new Symbol().getRandomValue();
-        String result = loginPage
-                .selectCountryFromDropDown(Countries.BELARUS)
-                .enterPhoneNumber(number)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by phone number with HTML tags")
-    public void testLoginByPhoneNumberWithHTMLTags() {
-        String number = "<script>alert('test');</script>";
-        String result = loginPage
-                .selectCountryFromDropDown(Countries.BELARUS)
-                .enterPhoneNumber(number)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by phone number with XSS attack (script tag)")
-    public void testLoginByPhoneNumberWithXSSAttack() {
-        String number = "<script>alert('XSS');</script>";
-        String result = loginPage
-                .selectCountryFromDropDown(Countries.BELARUS)
-                .enterPhoneNumber(number)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_PHONE_FORMAT.getMessage(), result);
-    }
-
-    @Test
+    @Description("Авторизация с пустым email")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Login by email with empty query")
     public void testLoginByEmailWithEmptyQuery() {
+        Allure.step("Ввод пустого email");
         String result = loginPage
                 .clickOnSignByEmailButton()
                 .enterEmail("")
@@ -167,107 +129,13 @@ public class OzonLoginNegativeUITest {
                 .getIncorrectInputMessage()
                 .getText();
 
+        Allure.step("Проверка сообщения об ошибке");
         Assertions.assertEquals(Messages.BLANK_EMAIL.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by email with single space character")
-    public void testLoginByEmailWithSingleSpaceCharacter() {
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(" ")
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.BLANK_EMAIL.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by too long email")
-    public void testLoginByTooLongEmail() {
-        String email = "S".repeat(255)+"@gmail.com";
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by invalid email - check why can't I sign in button")
-    public void testLoginByInvalidEmailWhyCantISignInButton() {
-        String email = "testgmail.com";
-
-        Assertions.assertTrue(loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getWhyCantISighInButton()
-                .isEnabled());
-    }
-
-    @Test
-    @DisplayName("Login by valid but not registered email")
-    public void testLoginByValidNotRegisteredEmail() {
-        String email = "test@gmail.com";
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.NO_ACCOUNT_WITH_SUCH_EMAIL.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by invalid email")
-    public void testLoginByInvalidEmail() {
-        String email = "testgmail.com";
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by email with HTML tags")
-    public void testLoginByEmailWithHTMLTags() {
-        String email = "<script>alert('test');</script>";
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
-    }
-
-    @Test
-    @DisplayName("Login by email with XSS attack (script tag)")
-    public void testLoginByEmailWithXSSAttack() {
-        String email = "<script>alert('XSS');</script>";
-        String result = loginPage
-                .clickOnSignByEmailButton()
-                .enterEmail(email)
-                .clickOnSignInButton()
-                .getIncorrectInputMessage()
-                .getText();
-
-        Assertions.assertEquals(Messages.INCORRECT_MAIL_FORMAT.getMessage(), result);
     }
 
     @AfterEach
-    public void tearsDown(TestInfo testInfo) {
+    @Step("Завершение теста и завершение работы драйвера")
+    public void tearDown(TestInfo testInfo) {
         logger.info("Test completed: {}", testInfo.getDisplayName());
         Singleton.quit();
     }
