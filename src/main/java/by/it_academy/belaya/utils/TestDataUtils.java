@@ -90,4 +90,13 @@ public class TestDataUtils {
         logger.info("Formatted phone number: {}", result);
         return result;
     }
+
+    public static String toJson(Object object) {
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (IOException e) {
+            logger.error("Error converting object to JSON", e);
+            throw new RuntimeException("Error converting object to JSON", e);
+        }
+    }
 }
