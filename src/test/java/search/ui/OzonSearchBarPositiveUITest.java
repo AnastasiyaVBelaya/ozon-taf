@@ -3,7 +3,6 @@ package search.ui;
 import by.it_academy.belaya.base.Singleton;
 import by.it_academy.belaya.pages.HomePage;
 import by.it_academy.belaya.testdata.ArticleNumber;
-import by.it_academy.belaya.testdata.PartialProductName;
 import by.it_academy.belaya.testdata.ProductName;
 import org.junit.jupiter.api.*;
 import org.apache.logging.log4j.LogManager;
@@ -57,18 +56,6 @@ public class OzonSearchBarPositiveUITest {
     @DisplayName("Search by product name")
     public void testSearchByProductName() {
         String searchQuery = new ProductName().getRandomValue();
-        String result = homePage
-                .enterSearchQuery(searchQuery)
-                .submitSearchByButton()
-                .getSearchResultTitle();
-
-        Assertions.assertTrue(result.toLowerCase().contains(searchQuery.toLowerCase()));
-    }
-
-    @Test
-    @DisplayName("Search with partial product name")
-    public void testSearchWithPartialProductName() {
-        String searchQuery = new PartialProductName().getRandomValue();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()

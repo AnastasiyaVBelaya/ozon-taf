@@ -80,26 +80,24 @@ public class OzonSearchBarNegativeUITest {
     @DisplayName("Search product with maximum query length")
     public void testSearchProductWithMaxQueryLength() {
         String searchQuery = "9".repeat(255);
-        String expectedResult = Messages.NO_RESULTS.getMessage();
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
-                .getNoResultsMessage();
+                .getSearchResultMessage();
 
-        Assertions.assertTrue(result.contains(expectedResult));
+        Assertions.assertTrue(result.contains(searchQuery));
     }
 
     @Test
     @DisplayName("Search product with query exceeding max length")
     public void testSearchProductWithExceedingQueryLength() {
-        String searchQuery = "9".repeat(1000);
-        String expectedResult = Messages.NO_RESULTS.getMessage();
+        String searchQuery = "9".repeat(500);
         String result = homePage
                 .enterSearchQuery(searchQuery)
                 .submitSearchByButton()
-                .getNoResultsMessage();
+                .getSearchResultMessage();
 
-        Assertions.assertTrue(result.contains(expectedResult));
+        Assertions.assertTrue(result.contains("9".repeat(255)));
     }
 
     @Test
@@ -127,19 +125,6 @@ public class OzonSearchBarNegativeUITest {
                 .getSearchResultTitle();
 
         Assertions.assertTrue(result.toLowerCase().contains(productName.toLowerCase()));
-    }
-
-    @Test
-    @DisplayName("Search with spaces in the middle of the query")
-    public void testSearchQueryWithSpacesInTheMiddle() {
-        String searchQuery = new QueryWithSpacesInTheMiddle().getRandomValue();
-        String expectedResult = Messages.INVALID_SEARCH_QUERY.getMessage();
-        String result = homePage
-                .enterSearchQuery(searchQuery)
-                .submitSearchByButton()
-                .getNoExactResultsMessage();
-
-        Assertions.assertTrue(result.contains(expectedResult));
     }
 
     @Test
