@@ -4,7 +4,6 @@ import by.it_academy.belaya.enums.Countries;
 import by.it_academy.belaya.utils.TestDataUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
