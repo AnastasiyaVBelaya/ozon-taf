@@ -166,5 +166,4 @@ public class LoginPage {
     private Set<String> getAllWindows() {
         return Singleton.getDriver().getWindowHandles();
     }
-
 }

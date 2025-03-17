@@ -26,19 +26,4 @@ public class RecoveryPage {
         PageFactory.initElements(driver, this);
         logger.info("Opened Recovery Page: {}",Singleton.getDriver().getCurrentUrl());
     }
-
-    public boolean isRecoveryPageOpened() {
-        WaitUtils.waitForElementToBeVisible(titleText);
-        return titleText.getText().contains("Select a reason");
-    }
-
-    public WebElement getFirstReasonButton() {
-        WaitUtils.waitForElementToBeVisible(firstReasonButton);
-        return firstReasonButton;
-    }
-
-    public WebElement getSecondReasonButton() {
-        WaitUtils.waitForElementToBeVisible(secondReasonButton);
-        return secondReasonButton;
-    }
 }
